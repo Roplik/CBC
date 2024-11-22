@@ -107,7 +107,7 @@ class MyWidget(QMainWindow):
         self.load_classes()  # Обновление комбобокса
 
 
-class QuestionApp(QMainWindow):
+class QuestionApp(QMainWindow):  # Редактирование пула вопросов
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Questions")
@@ -146,7 +146,7 @@ class QuestionApp(QMainWindow):
         conn.close()
 
 
-class AddQuestionDialog(QDialog):
+class AddQuestionDialog(QDialog):  # Добавление уникального вопроса
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setWindowTitle("Add New Question")
@@ -173,7 +173,7 @@ class AddQuestionDialog(QDialog):
             self.accept()  # Закрываем диалог и возвращаем результат
 
 
-class StudentDatabaseApp(QWidget):
+class StudentDatabaseApp(QWidget):  # добавыление класса учеников, для создание индивидуальных варинатов
     def __init__(self):
         super().__init__()
         self.initUI()
