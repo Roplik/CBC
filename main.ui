@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>804</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>804</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="locale">
+   <locale language="Russian" country="Russia"/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QStackedWidget" name="stack">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>791</width>
+      <height>531</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="page">
+     <widget class="QPushButton" name="StartWithAngle">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>120</y>
+        <width>541</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background:rgba(0,0,0,255);
+color:rgb(255,255,255);
+border:2px solid rgb(255,255,255);
+border-radius: 10px;
+padding:10px;</string>
+      </property>
+      <property name="text">
+       <string>Создавать вариант с заданием: ''Бросок под углом к горизонту с земли&quot;.</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>-30</x>
+        <y>0</y>
+        <width>831</width>
+        <height>501</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background: rgba(20,20,20,150)</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>-90</x>
+        <y>-40</y>
+        <width>961</width>
+        <height>591</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>image/44068a4e4ff4d02e3e23d7e893f81f1d.jpg</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="description">
+      <property name="geometry">
+       <rect>
+        <x>684</x>
+        <y>420</y>
+        <width>91</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background:rgba(0,0,0,255);
+color:rgb(255,255,255);
+border:2px solid rgb(255,255,255);
+border-radius: 10px;
+padding:10px;
+</string>
+      </property>
+      <property name="text">
+       <string>Описание</string>
+      </property>
+     </widget>
+     <zorder>label_3</zorder>
+     <zorder>label_4</zorder>
+     <zorder>StartWithAngle</zorder>
+     <zorder>description</zorder>
+    </widget>
+    <widget class="QWidget" name="page_2">
+     <widget class="QLabel" name="label">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>-30</x>
+        <y>-10</y>
+        <width>851</width>
+        <height>511</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-radius: 10px;
+</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap>image/1a2d81fc2413298f21e72e1dc9a0837f.png</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+      <property name="wordWrap">
+       <bool>false</bool>
+      </property>
+      <property name="openExternalLinks">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>340</y>
+        <width>451</width>
+        <height>39</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="kolvo_var">
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="styleSheet">
+          <string notr="true">color:rgb(255,10,0)</string>
+         </property>
+         <property name="text">
+          <string>Введите количество вариантов:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="n">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>-30</x>
+        <y>0</y>
+        <width>831</width>
+        <height>501</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background: rgba(0,0,0,200)</string>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QWidget" name="horizontalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>380</y>
+        <width>451</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QRadioButton" name="NameVAR">
+         <property name="styleSheet">
+          <string notr="true">background:rgb(255,255,255)</string>
+         </property>
+         <property name="text">
+          <string>Создать индивидуально для учеников</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="class_button">
+         <property name="text">
+          <string>Редактировать класс</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="classes"/>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>410</y>
+        <width>452</width>
+        <height>82</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QPushButton" name="create_var">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>450</width>
+           <height>25</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>300</width>
+           <height>35</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color:rgba(0,0,0,0);
+border:2px solid rgba(255,33,0,230);
+border-radius: 10px;
+padding:10px;
+color:rgb(255,10,0);</string>
+         </property>
+         <property name="text">
+          <string>Создать</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="redact">
+         <property name="styleSheet">
+          <string notr="true">background-color:rgba(0,0,0,0);
+border:2px solid rgba(255,33,0,230);
+border-radius: 10px;
+padding:10px;
+color:rgb(255,10,0);</string>
+         </property>
+         <property name="text">
+          <string>Отредактировать вопросы</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="backbtn">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>420</y>
+        <width>91</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color:rgba(0,0,0,0);
+border:2px solid rgba(255,33,0,230);
+border-radius: 10px;
+padding:10px;
+color:rgb(255,10,0);
+</string>
+      </property>
+      <property name="text">
+       <string>back</string>
+      </property>
+     </widget>
+     <zorder>label</zorder>
+     <zorder>label_5</zorder>
+     <zorder>layoutWidget</zorder>
+     <zorder>horizontalLayoutWidget</zorder>
+     <zorder>verticalLayoutWidget</zorder>
+     <zorder>backbtn</zorder>
+    </widget>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
