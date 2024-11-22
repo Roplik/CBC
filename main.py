@@ -205,7 +205,7 @@ class StudentDatabaseApp(QWidget):
         layout.addWidget(self.remove_button)
 
         self.setLayout(layout)
-        self.setWindowTitle('Загрузка класса')
+        self.setWindowTitle('Загрузка класса учеников')
         self.resize(400, 300)
         self.show()
 
