@@ -205,7 +205,7 @@ class StudentDatabaseApp(QWidget):
         layout.addWidget(self.remove_button)
 
         self.setLayout(layout)
-        self.setWindowTitle('Загрузка студентов')
+        self.setWindowTitle('Загрузка класса')
         self.resize(400, 300)
         self.show()
 
@@ -272,8 +272,9 @@ class Description(QWidget):
         # Создаем вертикальный макет
         layout = QVBoxLayout()
 
-        text = ('Подсказка: Чтобы добавить учеников класса, создайте txt файл с фамилиями учащихся. Каждая фамилия на от'
-                'дельной строке')
+        text = (
+            'Подсказка: Чтобы добавить учеников класса, создайте txt файл с фамилиями учащихся. Каждая фамилия на от'
+            'дельной строке')
 
         # Создаем метку с текстом
         label = QLabel(text, self)
