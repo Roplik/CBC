@@ -7,10 +7,8 @@ from main import *
 def calculate(n, boolean, name_class=None):
     text = []
     otvet = []
-
     v_massiv = [i for i in range(100, 401, 10)]
     a_massiv = [i for i in range(20, 81, 5)]
-
     if boolean:
         n = take_name_in_classes(name_class)
     else:

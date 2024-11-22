@@ -146,34 +146,7 @@ class QuestionApp(QMainWindow):  # Редактирование пула воп�
         conn.close()
 
 
-class AddQuestionDialog(QDialog):  # Добавление уникального вопроса
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setWindowTitle("Add New Question")
-        self.question_text = QLineEdit(self)
-
-        add_button = QPushButton("Add", self)
-        add_button.clicked.connect(self.add_question)
-
-        cancel_button = QPushButton("Cancel", self)
-        cancel_button.clicked.connect(self.reject)
-        layout = QFormLayout()
-        layout.addRow(QLabel("Question:"), self.question_text)
-
-        button_layout = QVBoxLayout()
-        button_layout.addWidget(add_button)
-        button_layout.addWidget(cancel_button)
-
-        layout.addRow(button_layout)
-        self.setLayout(layout)
-
-    def add_question(self):
-        question = self.question_text.text()
-        if question:  # Проверяем, что вопрос не пустой
-            self.accept()  # Закрываем диалог и возвращаем результат
-
-
-class StudentDatabaseApp(QWidget):  # добавыление класса учеников, для создание индивидуальных варинатов
+class StudentDatabaseApp(QWidget):
     def __init__(self):
         super().__init__()
         self.initUI()
@@ -194,9 +167,19 @@ class StudentDatabaseApp(QWidget):  # добавыление класса уче
         self.load_button.clicked.connect(self.load_file)
         layout.addWidget(self.load_button)
 
-        self.label_remove_class = QLabel(
-            'Введите название класса для удаления:')  # Поле для ввода названия класса для удаления
+        self.label_class_view = QLabel('Введите название класса:')
+        layout.addWidget(self.label_class_view)
+
+        self.class_name_view_input = QLineEdit()
+        layout.addWidget(self.class_name_view_input)
+
+        self.show_students_button = QPushButton('Показать учеников')
+        self.show_students_button.clicked.connect(self.show_students)
+        layout.addWidget(self.show_students_button)
+
+        self.label_remove_class = QLabel('Введите название класса для удаления:')
         layout.addWidget(self.label_remove_class)
+
         self.remove_class_input = QLineEdit()
         layout.addWidget(self.remove_class_input)
 
@@ -210,7 +193,6 @@ class StudentDatabaseApp(QWidget):  # добавыление класса уче
         self.show()
 
     def create_table(self, class_name):
-        # Создаем таблицу с именем класса, если она не существует
         with self.conn:
             self.conn.execute(f'''
                 CREATE TABLE IF NOT EXISTS "{class_name}" (
@@ -234,13 +216,12 @@ class StudentDatabaseApp(QWidget):  # добавыление класса уче
                     QMessageBox.information(self, "Успех", "Фамилии успешно загружены в базу данных.")
             except Exception as e:
                 QMessageBox.critical(self, "Ошибка", f"Не удалось загрузить файл: {e}")
-        ex.load_classes()
 
     def save_names_to_db(self, class_name, names):
         with self.conn:
             for name in names:
-                name = name.strip()  # Убираем лишние пробелы и символы новой строки
-                if name:  # Проверяем, что строка не пустая
+                name = name.strip()
+                if name:
                     self.conn.execute(f'INSERT INTO "{class_name}" (full_name) VALUES (?)', (name,))
 
     def remove_class(self):
@@ -248,13 +229,84 @@ class StudentDatabaseApp(QWidget):  # добавыление класса уче
         if not class_name:
             QMessageBox.warning(self, "Ошибка", "Пожалуйста, введите название класса для удаления.")
             return
-        with self.conn:  # Удаляем класс без подтверждения
+        with self.conn:
             self.conn.execute(f'DROP TABLE IF EXISTS "{class_name}"')
         QMessageBox.information(self, "Успех", f"Класс '{class_name}' успешно удален.")
-        ex.load_classes()
+
+    def show_students(self):
+        class_name = self.class_name_view_input.text().strip()
+        if not class_name:
+            QMessageBox.warning(self, "Ошибка", "Пожалуйста, введите название класса.")
+            return
+        student_window = StudentListWindow(class_name)
+        student_window.exec()
 
     def closeEvent(self, event):
         self.conn.close()  # Закрываем соединение с базой данных при закрытии приложения
+        event.accept()
+
+
+class StudentListWindow(QDialog):
+    def __init__(self, class_name):
+        super().__init__()
+        self.class_name = class_name
+        self.conn = sqlite3.connect('students.db')
+
+        self.initUI()
+
+    def initUI(self):
+        layout = QVBoxLayout()
+
+        self.table_widget = QTableWidget()
+        layout.addWidget(self.table_widget)
+
+        save_button = QPushButton("Сохранить изменения")
+        save_button.clicked.connect(self.save_changes)
+        layout.addWidget(save_button)
+
+        self.load_data()
+
+        self.setLayout(layout)
+        self.setWindowTitle(f"Ученики класса: {self.class_name}")
+        self.resize(600, 400)
+        self.show()
+
+    def load_data(self):
+        cursor = self.conn.cursor()
+        cursor.execute(f"SELECT * FROM [{self.class_name}]")
+        rows = cursor.fetchall()
+
+        if rows:
+            columns = [description[0] for description in cursor.description]
+            self.table_widget.setRowCount(len(rows))
+            self.table_widget.setColumnCount(len(columns))
+            self.table_widget.setHorizontalHeaderLabels(columns)
+
+            for row_index, row in enumerate(rows):
+                for column_index, item in enumerate(row):
+                    self.table_widget.setItem(row_index, column_index, QTableWidgetItem(str(item)))
+
+    def save_changes(self):
+        row_count = self.table_widget.rowCount()
+
+        for row in range(row_count):
+            full_name_item = self.table_widget.item(row, 1)  # Предполагаем, что имя во втором столбце
+            id_item = self.table_widget.item(row, 0)  # ID в первом столбце
+
+            if full_name_item and id_item:
+                full_name = full_name_item.text()
+                student_id = id_item.text()
+
+                with self.conn:
+                    self.conn.execute(
+                        f'UPDATE "{self.class_name}" SET full_name = ? WHERE id = ?',
+                        (full_name, student_id)
+                    )
+
+        QMessageBox.information(self, "Успех", "Изменения успешно сохранены.")
+
+    def closeEvent(self, event):
+        self.conn.close()  # Закрываем соединение с базой данных при закрытии окна
         event.accept()
 
 

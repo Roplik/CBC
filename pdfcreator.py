@@ -1,6 +1,6 @@
 import random
 import sqlite3
-from PyQt6.QtWidgets import QMessageBox
+from PyQt6.QtWidgets import QMessageBox, QFileDialog
 from fpdf import FPDF
 
 var_name = []
@@ -82,7 +82,7 @@ class PDFCreator:
             max_columns_per_row = 10
             rows_needed = (n + max_columns_per_row - 1) // max_columns_per_row  # Округляем вверх
 
-            for row in range(rows_needed):     # Генерируем строки таблицы
+            for row in range(rows_needed):  # Генерируем строки таблицы
                 pdf.cell(80)  # Отступ слева
                 for col in range(max_columns_per_row):
                     index = row * max_columns_per_row + col
@@ -128,7 +128,10 @@ class PDFCreator:
             pdf.ln(5)
         # -------------------------------------------------------------------------------------------------------------#
         print("Дело сделано")
-        pdf.output("Complete.pdf")
+        # Открываем диалоговое окно для сохранения файла
+        file_name, _ = QFileDialog.getSaveFileName(None, "Сохранить файл", "", "PDF Files (*.pdf);;All Files (*)")
+        if file_name:
+            pdf.output(file_name)
 
 
 '''TABLE_DATA = (
@@ -146,4 +149,3 @@ class PDFCreator:
     ("11. Проекцию скорости Vy в момент времени t", ""),
     ("12.Модуль скорости V в момент t", ""),
     ("13.Угол β между вектором скорости и осью х в момент времени t", ""),'''
-
